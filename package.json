@@ -1,8 +1,27 @@
 {
-  "name": "inline-props",
-  "displayName": "React Props Pattern Transformer",
-  "description": "Transform React component props between interface, type, and inline patterns",
+  "name": "props-pattern-transformer",
+  "displayName": "Props Pattern Transformer",
+  "description": "Transform React props between interface, type, and inline patterns with quick fixes",
   "version": "0.0.1",
+  "publisher": "mglst",
+  "author": "mglst",
+  "license": "MIT",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mglst/vscode-props-pattern-transformer"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "props",
+    "refactor",
+    "interface",
+    "type",
+    "inline",
+    "transform",
+    "quick-fix"
+  ],
   "engines": {
     "vscode": "^1.85.0"
   },
