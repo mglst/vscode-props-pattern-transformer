@@ -27,8 +27,16 @@ export class PropsPatternCodeActionProvider implements vscode.CodeActionProvider
 
     // Offer transformations to the other two patterns
     if (detection.pattern !== 'interface') {
+      const title = detection.pattern === 'inline'
+        ? 'Extract props to interface'
+        : 'Convert props type alias to interface';
+      const kind = detection.pattern === 'inline'
+        ? vscode.CodeActionKind.RefactorExtract
+        : vscode.CodeActionKind.RefactorRewrite;
+
       const action = this.createTransformAction(
-        'Convert to interface',
+        title,
+        kind,
         'interface',
         detection,
         component,
@@ -39,8 +47,16 @@ export class PropsPatternCodeActionProvider implements vscode.CodeActionProvider
     }
 
     if (detection.pattern !== 'type') {
+      const title = detection.pattern === 'inline'
+        ? 'Extract props to type alias'
+        : 'Convert props interface to type alias';
+      const kind = detection.pattern === 'inline'
+        ? vscode.CodeActionKind.RefactorExtract
+        : vscode.CodeActionKind.RefactorRewrite;
+
       const action = this.createTransformAction(
-        'Convert to type alias',
+        title,
+        kind,
         'type',
         detection,
         component,
@@ -51,8 +67,13 @@ export class PropsPatternCodeActionProvider implements vscode.CodeActionProvider
     }
 
     if (detection.pattern !== 'inline') {
+      const title = detection.pattern === 'interface'
+        ? 'Inline props interface to object literal'
+        : 'Inline props type alias to object literal';
+
       const action = this.createTransformAction(
-        'Convert to inline props',
+        title,
+        vscode.CodeActionKind.RefactorRewrite,
         'inline',
         detection,
         component,
@@ -67,6 +88,7 @@ export class PropsPatternCodeActionProvider implements vscode.CodeActionProvider
 
   private createTransformAction(
     title: string,
+    kind: vscode.CodeActionKind,
     targetPattern: Pattern,
     detection: any,
     component: any,
@@ -80,7 +102,7 @@ export class PropsPatternCodeActionProvider implements vscode.CodeActionProvider
       return null;
     }
 
-    const action = new vscode.CodeAction(title, vscode.CodeActionKind.RefactorRewrite);
+    const action = new vscode.CodeAction(title, kind);
     action.edit = result;
     return action;
   }

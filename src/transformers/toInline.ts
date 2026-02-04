@@ -23,7 +23,7 @@ export function interfaceToInline(
   const typeText = printNode(typeLiteral, sourceFile);
 
   // Replace type reference with inline type
-  const paramStart = document.positionAt(paramType.pos);
+  const paramStart = document.positionAt(paramType.getStart(sourceFile));
   const paramEnd = document.positionAt(paramType.end);
   edit.replace(document.uri, new vscode.Range(paramStart, paramEnd), typeText);
 
@@ -61,7 +61,7 @@ export function typeToInline(
   const typeText = printNode(typeNode, sourceFile);
 
   // Replace type reference with inline type
-  const paramStart = document.positionAt(paramType.pos);
+  const paramStart = document.positionAt(paramType.getStart(sourceFile));
   const paramEnd = document.positionAt(paramType.end);
   edit.replace(document.uri, new vscode.Range(paramStart, paramEnd), typeText);
 

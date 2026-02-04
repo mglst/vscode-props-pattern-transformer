@@ -12,7 +12,10 @@ export function activate(context: vscode.ExtensionContext) {
       ],
       provider,
       {
-        providedCodeActionKinds: [vscode.CodeActionKind.RefactorRewrite]
+        providedCodeActionKinds: [
+          vscode.CodeActionKind.RefactorExtract,
+          vscode.CodeActionKind.RefactorRewrite
+        ]
       }
     )
   );

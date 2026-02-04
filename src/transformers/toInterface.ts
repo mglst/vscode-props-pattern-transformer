@@ -40,9 +40,9 @@ export function typeToInterface(
   const interfaceText = printNode(interfaceDecl, sourceFile);
 
   // Replace the type declaration with interface declaration
-  const start = document.positionAt(typeDeclaration.pos);
+  const start = document.positionAt(typeDeclaration.getFullStart());
   const end = document.positionAt(typeDeclaration.end);
-  edit.replace(document.uri, new vscode.Range(start, end), interfaceText);
+  edit.replace(document.uri, new vscode.Range(start, end), `\n\n${interfaceText}`);
 
   return edit;
 }
@@ -64,14 +64,14 @@ export function inlineToInterface(
   const interfaceText = printNode(interfaceDecl, sourceFile);
 
   // Insert interface before component
-  const componentStart = document.positionAt(component.pos);
-  edit.insert(document.uri, componentStart, `${interfaceText}\n\n`);
+  const componentStart = document.positionAt(component.getFullStart());
+  edit.insert(document.uri, componentStart, `\n\n${interfaceText}`);
 
   // Replace inline type with type reference
   const typeRef = createTypeReference(propsName);
   const typeRefText = printNode(typeRef, sourceFile);
 
-  const paramStart = document.positionAt(typeLiteral.pos);
+  const paramStart = document.positionAt(typeLiteral.getStart(sourceFile));
   const paramEnd = document.positionAt(typeLiteral.end);
   edit.replace(document.uri, new vscode.Range(paramStart, paramEnd), typeRefText);
 
