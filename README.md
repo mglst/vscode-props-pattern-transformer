@@ -2,11 +2,14 @@
 
 A VSCode extension that transforms React component props between three different TypeScript patterns using AST-based transformations.
 
+![Props Pattern Transformer Demo](props-pattern-transformer-demo.gif)
+
 ## Features
 
 Transform between three prop definition patterns:
 
 1. **Interface Pattern**
+
 ```typescript
 interface DrawerProps {
   header: string;
@@ -17,6 +20,7 @@ function Drawer({ header }: DrawerProps) {
 ```
 
 2. **Type Alias Pattern**
+
 ```typescript
 type DrawerProps = {
   header: string;
@@ -27,6 +31,7 @@ function Drawer({ header }: DrawerProps) {
 ```
 
 3. **Inline Pattern**
+
 ```typescript
 function Drawer({ header }: { header: string }) {
   return <></>;
@@ -43,6 +48,7 @@ function Drawer({ header }: { header: string }) {
    - "Convert to inline props"
 
 The extension uses the TypeScript Compiler API to safely transform your code while preserving:
+
 - Type parameters (generics)
 - Export modifiers
 - Comments and formatting
